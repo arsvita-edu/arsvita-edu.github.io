@@ -1,0 +1,13 @@
+ARS VITA — REVISIÓN V5.1
+
+Cambio solicitado:
+- Se incorporó la fotografía proporcionada de la Lic. Fabiola Renée Betancourt Kanashiro en la sección “Directora”.
+- La fotografía reemplaza el monograma provisional “FB”.
+- Se mantiene el diseño profesional de la sección y la línea de tiempo cronológica de su trayectoria.
+- La imagen se conserva como recurso local en assets/fabiola-betancourt.png.
+
+Fuente de la fotografía:
+- Fotografía proporcionada por el usuario para uso en el prototipo web.
+
+Nota:
+- Antes de publicar el sitio en producción, confirmar con ARS VITA la autorización para publicar la fotografía y, de ser posible, obtener una versión original de mayor resolución.

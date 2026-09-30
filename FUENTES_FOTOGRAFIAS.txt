@@ -1,0 +1,11 @@
+Fotos de referencia de la antigua presencia web pública de ARS VITA (VPI Media):
+
+hero: https://vpimedia.net/arsvita/admin/inicio/img/banner6.jpg
+nosotros: https://vpimedia.net/ckfinder/arsvita_files/images/index/galeria1/2.jpg
+metodologia: https://vpimedia.net/ckfinder/arsvita_files/images/index/galeria2/2.jpg
+lenguaje: https://vpimedia.net/ckfinder/arsvita_files/images/index/galeria2/3-mini.jpg
+fisica: https://vpimedia.net/ckfinder/arsvita_files/images/servicios/fisica/fisicas3.jpg
+ocupacional: https://vpimedia.net/ckfinder/arsvita_files/images/servicios/ocupacional/ocupacional1.jpg
+actividad: https://vpimedia.net/ckfinder/arsvita_files/images/index/galeria1/7.jpg
+
+Para publicación definitiva: confirmar autorización de reutilización y solicitar originales en alta resolución.
