@@ -58,36 +58,49 @@ form.addEventListener('submit', (e) => {
   window.open(url, '_blank', 'noopener');
 });
 
-
 const institutionalVideo = document.getElementById('institutionalVideo');
 const videoModal = document.getElementById('videoModal');
 const closeVideo = document.getElementById('closeVideo');
+const videoPoster = document.getElementById('videoPoster');
+const playInstitutionalVideo = document.getElementById('playInstitutionalVideo');
+const institutionalVideoFrame = document.getElementById('institutionalVideoFrame');
 
 if (institutionalVideo && videoModal && closeVideo) {
   institutionalVideo.addEventListener('click', (event) => {
     event.preventDefault();
     videoModal.classList.add('open');
     videoModal.setAttribute('aria-hidden', 'false');
+
+    if (videoPoster) videoPoster.style.display = 'flex';
+    if (institutionalVideoFrame) {
+      institutionalVideoFrame.style.display = 'none';
+      institutionalVideoFrame.src = 'about:blank';
+    }
   });
 
   function hideInstitutionalVideo() {
     videoModal.classList.remove('open');
     videoModal.setAttribute('aria-hidden', 'true');
 
-    const frame = videoModal.querySelector('iframe');
-    if (frame) {
-      const source = frame.src;
-      frame.src = '';
-      frame.src = source;
+    if (videoPoster) videoPoster.style.display = 'flex';
+    if (institutionalVideoFrame) {
+      institutionalVideoFrame.src = 'about:blank';
+      institutionalVideoFrame.style.display = 'none';
     }
+  }
+
+  if (playInstitutionalVideo && institutionalVideoFrame && videoPoster) {
+    playInstitutionalVideo.addEventListener('click', () => {
+      institutionalVideoFrame.src = institutionalVideoFrame.dataset.src;
+      institutionalVideoFrame.style.display = 'block';
+      videoPoster.style.display = 'none';
+    });
   }
 
   closeVideo.addEventListener('click', hideInstitutionalVideo);
 
   videoModal.addEventListener('click', (event) => {
-    if (event.target === videoModal) {
-      hideInstitutionalVideo();
-    }
+    if (event.target === videoModal) hideInstitutionalVideo();
   });
 
   document.addEventListener('keydown', (event) => {
@@ -96,7 +109,3 @@ if (institutionalVideo && videoModal && closeVideo) {
     }
   });
 }
-
-
-
-
