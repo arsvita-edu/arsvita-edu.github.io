@@ -211,11 +211,24 @@
 <div class="video-modal" id="videoModal" aria-hidden="true">
   <div class="video-modal-content" role="dialog" aria-modal="true" aria-label="Video institucional de ARS VITA">
     <button class="video-modal-close" id="closeVideo" type="button" aria-label="Cerrar video">&times;</button>
+
     <div class="video-modal-player">
+      <div class="video-poster" id="videoPoster">
+        <img src="arsvita-logo.png" alt="Logo oficial de ARS VITA" class="video-poster-logo">
+        <h2>ARS VITA</h2>
+        <p>Atendiendo a la diversidad</p>
+        <button type="button" class="video-play-button" id="playInstitutionalVideo" aria-label="Reproducir video institucional">
+          <span aria-hidden="true">▶</span>
+        </button>
+        <span class="video-poster-caption">Ver video institucional</span>
+      </div>
+
       <iframe
-        src="https://drive.google.com/file/d/15yLFHxDJpAEuBBrdRVyIC8czH0l88Hgu/preview"
+        id="institutionalVideoFrame"
+        src="about:blank"
+        data-src="https://drive.google.com/file/d/15yLFHxDJpAEuBBrdRVyIC8czH0l88Hgu/preview?autoplay=1"
         title="Video institucional de ARS VITA"
-        allow="autoplay"
+        allow="autoplay; fullscreen"
         allowfullscreen>
       </iframe>
     </div>
