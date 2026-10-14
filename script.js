@@ -57,3 +57,46 @@ form.addEventListener('submit', (e) => {
   status.textContent = 'Preparando WhatsApp institucional…';
   window.open(url, '_blank', 'noopener');
 });
+
+
+const institutionalVideo = document.getElementById('institutionalVideo');
+const videoModal = document.getElementById('videoModal');
+const closeVideo = document.getElementById('closeVideo');
+
+if (institutionalVideo && videoModal && closeVideo) {
+  institutionalVideo.addEventListener('click', (event) => {
+    event.preventDefault();
+    videoModal.classList.add('open');
+    videoModal.setAttribute('aria-hidden', 'false');
+  });
+
+  function hideInstitutionalVideo() {
+    videoModal.classList.remove('open');
+    videoModal.setAttribute('aria-hidden', 'true');
+
+    const frame = videoModal.querySelector('iframe');
+    if (frame) {
+      const source = frame.src;
+      frame.src = '';
+      frame.src = source;
+    }
+  }
+
+  closeVideo.addEventListener('click', hideInstitutionalVideo);
+
+  videoModal.addEventListener('click', (event) => {
+    if (event.target === videoModal) {
+      hideInstitutionalVideo();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && videoModal.classList.contains('open')) {
+      hideInstitutionalVideo();
+    }
+  });
+}
+
+
+
+
