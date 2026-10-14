@@ -58,12 +58,13 @@ form.addEventListener('submit', (e) => {
   window.open(url, '_blank', 'noopener');
 });
 
+
 const institutionalVideo = document.getElementById('institutionalVideo');
 const videoModal = document.getElementById('videoModal');
 const closeVideo = document.getElementById('closeVideo');
 const videoPoster = document.getElementById('videoPoster');
 const playInstitutionalVideo = document.getElementById('playInstitutionalVideo');
-const institutionalVideoFrame = document.getElementById('institutionalVideoFrame');
+const institutionalVideoPlayer = document.getElementById('institutionalVideoPlayer');
 
 if (institutionalVideo && videoModal && closeVideo) {
   institutionalVideo.addEventListener('click', (event) => {
@@ -72,9 +73,10 @@ if (institutionalVideo && videoModal && closeVideo) {
     videoModal.setAttribute('aria-hidden', 'false');
 
     if (videoPoster) videoPoster.style.display = 'flex';
-    if (institutionalVideoFrame) {
-      institutionalVideoFrame.style.display = 'none';
-      institutionalVideoFrame.src = 'about:blank';
+    if (institutionalVideoPlayer) {
+      institutionalVideoPlayer.pause();
+      institutionalVideoPlayer.currentTime = 0;
+      institutionalVideoPlayer.style.display = 'none';
     }
   });
 
@@ -82,18 +84,40 @@ if (institutionalVideo && videoModal && closeVideo) {
     videoModal.classList.remove('open');
     videoModal.setAttribute('aria-hidden', 'true');
 
-    if (videoPoster) videoPoster.style.display = 'flex';
-    if (institutionalVideoFrame) {
-      institutionalVideoFrame.src = 'about:blank';
-      institutionalVideoFrame.style.display = 'none';
+    if (institutionalVideoPlayer) {
+      institutionalVideoPlayer.pause();
+      institutionalVideoPlayer.currentTime = 0;
+      institutionalVideoPlayer.style.display = 'none';
     }
+
+    if (videoPoster) videoPoster.style.display = 'flex';
   }
 
-  if (playInstitutionalVideo && institutionalVideoFrame && videoPoster) {
+  if (playInstitutionalVideo && institutionalVideoPlayer && videoPoster) {
     playInstitutionalVideo.addEventListener('click', () => {
-      institutionalVideoFrame.src = institutionalVideoFrame.dataset.src;
-      institutionalVideoFrame.style.display = 'block';
       videoPoster.style.display = 'none';
+      institutionalVideoPlayer.style.display = 'block';
+      institutionalVideoPlayer.currentTime = 0;
+
+      const playback = institutionalVideoPlayer.play();
+      if (playback && typeof playback.catch === 'function') {
+        playback.catch(() => {
+          videoPoster.style.display = 'flex';
+          institutionalVideoPlayer.style.display = 'none';
+          alert('No se pudo reproducir el video. Intenta pulsar nuevamente el botón.');
+        });
+      }
+    });
+
+    institutionalVideoPlayer.addEventListener('ended', () => {
+      institutionalVideoPlayer.style.display = 'none';
+      videoPoster.style.display = 'flex';
+
+      const playButton = document.getElementById('playInstitutionalVideo');
+      const caption = videoPoster.querySelector('.video-poster-caption');
+
+      if (playButton) playButton.style.display = 'none';
+      if (caption) caption.textContent = 'Video finalizado. Pulsa la X para regresar a la página.';
     });
   }
 
