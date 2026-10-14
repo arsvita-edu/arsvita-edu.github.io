@@ -231,5 +231,97 @@ main{max-width:1240px;margin:0 auto}.page{display:none;min-height:calc(100vh - 7
 }
 
 
+/* Portada institucional del video ARS VITA */
+.video-poster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  padding: 28px 20px;
+  box-sizing: border-box;
+  text-align: center;
+  color: #87334f;
+  background: #faf3eb;
+}
+
+.video-poster-logo {
+  display: block;
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+}
+
+.video-poster h2 {
+  margin: 0;
+  color: #87334f;
+  font-size: clamp(30px, 5vw, 48px);
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.video-poster p {
+  margin: 0;
+  color: #76656a;
+  font-size: 17px;
+}
+
+.video-play-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  background: #87334f;
+  box-shadow: 0 8px 24px rgba(70, 30, 45, 0.25);
+  font-size: 28px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.video-play-button:hover {
+  transform: scale(1.08);
+  background: #6f263f;
+}
+
+.video-poster-caption {
+  color: #87334f;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.video-modal-player iframe {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .video-poster {
+    min-height: 230px;
+    padding: 20px 12px;
+    gap: 9px;
+  }
+
+  .video-poster-logo {
+    width: 78px;
+    height: 78px;
+  }
+
+  .video-poster p {
+    font-size: 14px;
+  }
+
+  .video-play-button {
+    width: 62px;
+    height: 62px;
+    font-size: 23px;
+  }
+}
 
 
