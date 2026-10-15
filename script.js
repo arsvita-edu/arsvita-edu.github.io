@@ -1,4 +1,4 @@
-const routes = [...document.querySelectorAll('[data-route]')];
+  const routes = [...document.querySelectorAll('[data-route]')];
 const pages = [...document.querySelectorAll('.page')];
 const nav = document.getElementById('mainNav');
 const toggle = document.getElementById('menuToggle');
@@ -66,65 +66,77 @@ const videoPoster = document.getElementById('videoPoster');
 const playInstitutionalVideo = document.getElementById('playInstitutionalVideo');
 const institutionalVideoPlayer = document.getElementById('institutionalVideoPlayer');
 
-if (institutionalVideo && videoModal && closeVideo) {
-  institutionalVideo.addEventListener('click', (event) => {
+if (
+  institutionalVideo &&
+  videoModal &&
+  closeVideo &&
+  videoPoster &&
+  playInstitutionalVideo &&
+  institutionalVideoPlayer
+) {
+  const caption = videoPoster.querySelector('.video-poster-caption');
+
+  function resetInstitutionalVideo() {
+    institutionalVideoPlayer.pause();
+    institutionalVideoPlayer.currentTime = 0;
+    institutionalVideoPlayer.style.display = 'none';
+
+    videoPoster.style.display = 'flex';
+    playInstitutionalVideo.style.display = 'flex';
+
+    if (caption) {
+      caption.textContent = 'Ver video institucional';
+    }
+  }
+
+  function openInstitutionalVideo(event) {
     event.preventDefault();
+
+    resetInstitutionalVideo();
     videoModal.classList.add('open');
     videoModal.setAttribute('aria-hidden', 'false');
-
-    if (videoPoster) videoPoster.style.display = 'flex';
-    if (institutionalVideoPlayer) {
-      institutionalVideoPlayer.pause();
-      institutionalVideoPlayer.currentTime = 0;
-      institutionalVideoPlayer.style.display = 'none';
-    }
-  });
+  }
 
   function hideInstitutionalVideo() {
     videoModal.classList.remove('open');
     videoModal.setAttribute('aria-hidden', 'true');
 
-    if (institutionalVideoPlayer) {
-      institutionalVideoPlayer.pause();
-      institutionalVideoPlayer.currentTime = 0;
-      institutionalVideoPlayer.style.display = 'none';
+    resetInstitutionalVideo();
+  }
+
+  institutionalVideo.addEventListener('click', openInstitutionalVideo);
+
+  playInstitutionalVideo.addEventListener('click', () => {
+    videoPoster.style.display = 'none';
+    institutionalVideoPlayer.style.display = 'block';
+    institutionalVideoPlayer.currentTime = 0;
+
+    const playback = institutionalVideoPlayer.play();
+
+    if (playback && typeof playback.catch === 'function') {
+      playback.catch(() => {
+        resetInstitutionalVideo();
+        alert('No se pudo reproducir el video. Intenta pulsar nuevamente el botón.');
+      });
     }
+  });
 
-    if (videoPoster) videoPoster.style.display = 'flex';
-  }
+  institutionalVideoPlayer.addEventListener('ended', () => {
+    institutionalVideoPlayer.style.display = 'none';
+    videoPoster.style.display = 'flex';
+    playInstitutionalVideo.style.display = 'none';
 
-  if (playInstitutionalVideo && institutionalVideoPlayer && videoPoster) {
-    playInstitutionalVideo.addEventListener('click', () => {
-      videoPoster.style.display = 'none';
-      institutionalVideoPlayer.style.display = 'block';
-      institutionalVideoPlayer.currentTime = 0;
-
-      const playback = institutionalVideoPlayer.play();
-      if (playback && typeof playback.catch === 'function') {
-        playback.catch(() => {
-          videoPoster.style.display = 'flex';
-          institutionalVideoPlayer.style.display = 'none';
-          alert('No se pudo reproducir el video. Intenta pulsar nuevamente el botón.');
-        });
-      }
-    });
-
-    institutionalVideoPlayer.addEventListener('ended', () => {
-      institutionalVideoPlayer.style.display = 'none';
-      videoPoster.style.display = 'flex';
-
-      const playButton = document.getElementById('playInstitutionalVideo');
-      const caption = videoPoster.querySelector('.video-poster-caption');
-
-      if (playButton) playButton.style.display = 'none';
-      if (caption) caption.textContent = 'Video finalizado. Pulsa la X para regresar a la página.';
-    });
-  }
+    if (caption) {
+      caption.textContent = 'Video finalizado. Pulsa la X para regresar a la página.';
+    }
+  });
 
   closeVideo.addEventListener('click', hideInstitutionalVideo);
 
   videoModal.addEventListener('click', (event) => {
-    if (event.target === videoModal) hideInstitutionalVideo();
+    if (event.target === videoModal) {
+      hideInstitutionalVideo();
+    }
   });
 
   document.addEventListener('keydown', (event) => {
